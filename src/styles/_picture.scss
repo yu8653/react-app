@@ -1,0 +1,57 @@
+.pictures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .picture {
+    padding: 1rem;
+    width: 400px;
+
+    .photographer {
+      font-size: 1.5rem;
+      a {
+        &:hover {
+          text-decoration: none;
+          color: blueviolet;
+        }
+      }
+    }
+
+    .img-container {
+      overflow: hidden;
+      height: 40vh;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.25s ease;
+        &:hover {
+          transform: scale(1.25);
+        }
+      }
+    }
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.more-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  button {
+    padding: 0.25rem 0.5rem;
+    font-size: 2rem;
+    border: none;
+    background-color: rgb(73, 0, 73);
+    color: white;
+    cursor: pointer;
+  }
+}
