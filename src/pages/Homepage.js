@@ -9,10 +9,26 @@ const Homepage = () => {
   let [Pictures, setPictures] = useState([]);
   let [searchInput, setSearchInput] = useState("");
   let [url, setURL] = useState(initURL);
+  let [isFetch, setIsFetch] = useState(false);
 
   useEffect(() => {
     search();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + Math.ceil(window.pageYOffset) >=
+      document.body.offsetHeight
+    ) {
+      setIsFetch(true);
+    }
+  };
+
+  useEffect(() => {
+    if (isFetch) search();
+  }, [isFetch]);
 
   const search = async (URL) => {
     const data = await fetch(URL || url, {
@@ -27,14 +43,23 @@ const Homepage = () => {
 
     setURL(parseData.next_page);
     setPictures((prev) => [...prev, ...parseData.photos]);
+    setIsFetch(false);
   };
 
-  const loadPicHandle = () => {
-    search();
+  const toTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div style={{ minHeight: "100vh" }}>
+      <button
+        type="button"
+        className="scroll-top"
+        title="Go to top"
+        onClick={toTop}
+      >
+        &uarr;
+      </button>
       <Search
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -47,8 +72,13 @@ const Homepage = () => {
           return <Picture key={picture.id} picture={picture} />;
         })}
       </div>
+
       <div className="more-picture">
-        <button onClick={loadPicHandle}>Load More</button>
+        {isFetch && (
+          <div>
+            <button type="button">Loading...</button>
+          </div>
+        )}
       </div>
     </div>
   );

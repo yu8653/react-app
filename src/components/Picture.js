@@ -12,7 +12,7 @@ const Picture = ({ picture }) => {
           const url = window.URL.createObjectURL(new Blob([buffer]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", `${picture.alt}.png`); //or any other extension
+          link.setAttribute("download", `${picture.alt}.png`);
           document.body.appendChild(link);
           link.click();
         });
@@ -24,22 +24,24 @@ const Picture = ({ picture }) => {
 
   return (
     <div className="picture">
-      <p className="photographer">
-        <a
-          title="photographer"
-          href={picture.photographer_url}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {picture.photographer}
-        </a>
-      </p>
       <div className="img-container">
-        <img src={picture.src.large} alt={picture.alt} />
+        <img lazy="load" src={picture.src.large} alt={picture.alt} />
+        <div className="overlay">
+          <a className="download" href={picture.src.large} onClick={download}>
+            &darr;
+          </a>
+          <p className="photographer">
+            <a
+              title="photographer"
+              href={picture.photographer_url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {picture.photographer}
+            </a>
+          </p>
+        </div>
       </div>
-      <a href={picture.src.large} onClick={download}>
-        Download Image
-      </a>
     </div>
   );
 };

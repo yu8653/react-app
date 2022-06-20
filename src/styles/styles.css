@@ -15,6 +15,27 @@ ul {
   list-style-type: none;
 }
 
+.hide {
+  display: none;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  z-index: 2;
+  padding: 0.9em 1.3em;
+  border: none;
+  border-radius: 50%;
+  opacity: 0.6;
+  color: white;
+  background-color: #9b6b9b;
+}
+
+.scroll-top:hover {
+  opacity: 1;
+}
+
 nav {
   background-color: #9b6b9b;
 }
@@ -105,16 +126,27 @@ nav ul li a {
 
 .pictures .picture .photographer {
   font-size: 1.5rem;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+.pictures .picture .photographer a {
+  color: white;
 }
 
 .pictures .picture .photographer a:hover {
-  text-decoration: none;
-  color: blueviolet;
+  text-decoration: underline;
 }
 
 .pictures .picture .img-container {
+  position: relative;
   overflow: hidden;
   height: 40vh;
+}
+
+.pictures .picture .img-container:hover .overlay {
+  opacity: 1;
 }
 
 .pictures .picture .img-container img {
@@ -131,8 +163,28 @@ nav ul li a {
           transform: scale(1.25);
 }
 
-.pictures .picture a:hover {
-  text-decoration: underline;
+.pictures .picture .img-container .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(transparent), to(rgba(0, 0, 0, 0.5)));
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent, rgba(0, 0, 0, 0.5));
+}
+
+.pictures .picture .img-container .overlay .download {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 0.4em 0.8em;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .more-picture {
