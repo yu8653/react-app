@@ -27,8 +27,11 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    if (isFetch && url) search();
-    setIsFetch(false);
+    if (isFetch && url) {
+      search();
+    } else {
+      setIsFetch(false);
+    }
   }, [isFetch]);
 
   const search = async () => {
@@ -44,6 +47,7 @@ const Homepage = () => {
 
     setURL(parseData.next_page);
     setPictures((prev) => [...prev, ...parseData.photos]);
+    setIsFetch(false);
   };
 
   const toTop = () => {
