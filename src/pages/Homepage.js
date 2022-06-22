@@ -27,11 +27,12 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    if (isFetch) search();
+    if (isFetch && url) search();
+    setIsFetch(false);
   }, [isFetch]);
 
-  const search = async (URL) => {
-    const data = await fetch(URL || url, {
+  const search = async () => {
+    const data = await fetch(url, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -43,7 +44,6 @@ const Homepage = () => {
 
     setURL(parseData.next_page);
     setPictures((prev) => [...prev, ...parseData.photos]);
-    setIsFetch(false);
   };
 
   const toTop = () => {
@@ -64,7 +64,7 @@ const Homepage = () => {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         setURL={setURL}
-        search={search}
+        setIsFetch={setIsFetch}
         setPictures={setPictures}
       />
       <div className="pictures">

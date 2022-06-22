@@ -3,7 +3,7 @@ import React from "react";
 const Search = ({
   searchInput,
   setSearchInput,
-  search,
+  setIsFetch,
   setURL,
   setPictures,
 }) => {
@@ -17,13 +17,20 @@ const Search = ({
       : `https://api.pexels.com/v1/curated?page=1&per_page=15`;
     setURL(searchURL);
     setPictures([]);
-    search(searchURL);
+    setIsFetch(true);
+  };
+
+  const keyUpHandle = (e) => {
+    if (e.key === "Enter") {
+      searchHandle();
+    }
   };
 
   return (
     <div className="search">
       <input
         onChange={searchInputChangeHandle}
+        onKeyUp={keyUpHandle}
         name="searchInput"
         type="text"
         value={searchInput}
