@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Search from "../components/Search";
 import Picture from "../components/Picture";
 
@@ -11,27 +11,28 @@ const Homepage = () => {
   let [url, setURL] = useState(initURL);
   let [isFetch, setIsFetch] = useState(false);
 
+  const observer = useRef();
+  const lastImageRef = useCallback(
+    (node) => {
+      if (isFetch) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setIsFetch(true);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isFetch]
+  );
+
   useEffect(() => {
     search();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + Math.ceil(window.pageYOffset) >=
-      document.body.offsetHeight
-    ) {
-      setIsFetch(true);
-    }
-  };
-
   useEffect(() => {
-    if (isFetch && url) {
-      search();
-    } else {
-      setIsFetch(false);
-    }
+    if (!isFetch || !url) setIsFetch(false);
+    else search();
   }, [isFetch]);
 
   const search = async () => {
@@ -43,14 +44,14 @@ const Homepage = () => {
       },
     });
 
-    let parseData = await data.json();
+    let { next_page = "", photos } = await data.json();
 
-    setURL(parseData.next_page);
-    setPictures((prev) => [...prev, ...parseData.photos]);
+    setURL(next_page);
+    setPictures((prev) => [...prev, ...photos]);
     setIsFetch(false);
   };
 
-  const toTop = () => {
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -60,7 +61,7 @@ const Homepage = () => {
         type="button"
         className="scroll-top"
         title="Go to top"
-        onClick={toTop}
+        onClick={scrollToTop}
       >
         &uarr;
       </button>
@@ -72,7 +73,15 @@ const Homepage = () => {
         setPictures={setPictures}
       />
       <div className="pictures">
-        {Pictures.map((picture) => {
+        {Pictures.map((picture, idx) => {
+          if (idx === Pictures.length - 1)
+            return (
+              <Picture
+                innerRef={lastImageRef}
+                key={picture.id}
+                picture={picture}
+              />
+            );
           return <Picture key={picture.id} picture={picture} />;
         })}
       </div>
