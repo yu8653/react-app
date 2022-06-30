@@ -3,12 +3,19 @@
   justify-content: center;
   align-items: center;
   padding: 3rem 0rem;
+  font-size: 0.75rem;
 
   input,
   button {
     font-size: 2rem;
     padding: 0.25rem;
     border: 2px solid rgb(43, 0, 43);
+  }
+
+  input {
+    flex: 0 1 300px;
+    display: block;
+    width: 100%;
   }
 
   button {
