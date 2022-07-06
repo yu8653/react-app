@@ -12,6 +12,10 @@ const Picture = ({ picture, innerRef }) => {
 
   useEffect(() => {
     observer.observe(img.current);
+<<<<<<< HEAD
+=======
+    return observer.unobserve(img.current);
+>>>>>>> 545fd76c6034cbfd9383236bdcef447137c540dc
   }, []);
 
   const download = (e) => {
@@ -37,7 +41,17 @@ const Picture = ({ picture, innerRef }) => {
   return (
     <div className="picture">
       <div ref={innerRef} className="img-container">
+<<<<<<< HEAD
         <img ref={img} loading="lazy" src={imgSrc} alt={picture.alt} />
+=======
+        <img
+          ref={img}
+          loading="lazy"
+          data-src={picture.src.large}
+          src={imgSrc}
+          alt={picture.alt}
+        />
+>>>>>>> 545fd76c6034cbfd9383236bdcef447137c540dc
         <div className="overlay">
           <a className="download" href={picture.src.large} onClick={download}>
             &darr;
