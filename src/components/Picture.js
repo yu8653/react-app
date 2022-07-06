@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Picture = ({ picture, innerRef }) => {
+  let [imgSrc, setImgSrc] = useState("");
+  const img = useRef();
+  let observer = new IntersectionObserver((entries, observer) => {
+    if (entries[0].isIntersecting) {
+      setImgSrc(picture.src.large);
+      observer.unobserve(img.current);
+    }
+  }, {});
+
+  useEffect(() => {
+    observer.observe(img.current);
+    return observer.unobserve(img.current);
+  }, []);
+
   const download = (e) => {
     e.preventDefault();
     fetch(e.target.href, {
@@ -23,11 +37,12 @@ const Picture = ({ picture, innerRef }) => {
 
   return (
     <div className="picture">
-      <div className="img-container">
+      <div ref={innerRef} className="img-container">
         <img
-          ref={innerRef}
+          ref={img}
           loading="lazy"
-          src={picture.src.large}
+          data-src={picture.src.large}
+          src={imgSrc}
           alt={picture.alt}
         />
         <div className="overlay">
