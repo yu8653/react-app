@@ -6,12 +6,16 @@ const Picture = ({ picture, innerRef }) => {
   let observer = new IntersectionObserver((entries, observer) => {
     if (entries[0].isIntersecting) {
       setImgSrc(picture.src.large);
-      observer.unobserve(img.current);
+      observer.disconnect();
     }
   }, {});
 
   useEffect(() => {
     observer.observe(img.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const download = (e) => {
