@@ -182,11 +182,12 @@ nav ul li a {
 .videos .video .container img {
   width: 100%;
 }
-.videos .video .container .layer .hide {
-  display: none;
-}
-.videos .video .container .layer video {
+.videos .video .container video {
   width: 100%;
+}
+.videos .video .container .transparent {
+  opacity: 0;
+  height: 0;
 }
 .videos .video .container .intro {
   display: flex;
@@ -202,8 +203,8 @@ nav ul li a {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  -webkit-animation: spin 2s linear infinite;
-          animation: spin 2s linear infinite;
+  -webkit-animation: spin 0.5s linear infinite;
+          animation: spin 0.5s linear infinite;
 }
 
 @-webkit-keyframes spin {

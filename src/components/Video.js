@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Video = ({ video, innerRef }) => {
   const [imgSrc, setImgSrc] = useState("");
+  const [videoReady, setVideoReady] = useState(false);
   const imgRef = useRef();
   const videoRef = useRef();
-  const [videoReady, setVideoReady] = useState(false);
+
   let observer = new IntersectionObserver((entries, observer) => {
     if (entries[0].isIntersecting) {
       setImgSrc(video.image);
@@ -27,39 +28,40 @@ const Video = ({ video, innerRef }) => {
   const videoCanPlay = (e) => {
     setVideoReady(true);
   };
-  const videoMouseOver = (e) => {
+  const videoPlay = (e) => {
     e.target.play();
   };
-  const videoMouseOut = (e) => {
+  const videoPause = (e) => {
     e.target.pause();
   };
 
   return (
     <div className="video">
       <div className="container" ref={innerRef}>
+        <video
+          ref={videoRef}
+          preload="none"
+          loop
+          className={!videoReady ? "transparent" : ""}
+          onCanPlay={videoCanPlay}
+          onMouseOver={videoPlay}
+          onMouseOut={videoPause}
+          onTouchStart={videoPlay}
+          onTouchEnd={videoPause}
+        >
+          {video.video_files.map((file) => (
+            <source key={file.id} src={file.link} type={file.file_type} />
+          ))}
+        </video>
         <img
-          className={videoReady && "hide"}
+          className={videoReady ? "hide" : ""}
           ref={imgRef}
           loading="lazy"
           src={imgSrc}
           alt="cover"
           onMouseOver={imgMouseOver}
         />
-        <div className="layer">
-          <video
-            ref={videoRef}
-            preload="none"
-            loop
-            className={!videoReady && "hide"}
-            onCanPlay={videoCanPlay}
-            onMouseOver={videoMouseOver}
-            onMouseOut={videoMouseOut}
-          >
-            {video.video_files.map((file) => (
-              <source key={file.id} src={file.link} type={file.file_type} />
-            ))}
-          </video>
-        </div>
+
         <div className="intro">
           <p className="author">
             <a href={video.user.url} target="_blank" rel="noreferrer">

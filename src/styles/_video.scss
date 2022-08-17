@@ -17,13 +17,12 @@
       img {
         width: 100%;
       }
-      .layer {
-        .hide {
-          display: none;
-        }
-        video {
-          width: 100%;
-        }
+      video {
+        width: 100%;
+      }
+      .transparent {
+        opacity: 0;
+        height: 0;
       }
 
       .intro {
