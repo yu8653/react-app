@@ -11,7 +11,7 @@ const Videopage = () => {
   let [videos, setVideos] = useState([]);
   let [searchInput, setSearchInput] = useState("");
   let [url, setURL] = useState(initURL);
-  let [isFetch, setIsFetch] = useState(false);
+  let [isFetch, setIsFetch] = useState(true);
 
   const observer = useRef();
   const lastVideoRef = useCallback(
@@ -44,10 +44,6 @@ const Videopage = () => {
     setVideos((prev) => [...prev, ...videos]);
     setIsFetch(false);
   };
-
-  useEffect(() => {
-    search();
-  }, []);
 
   useEffect(() => {
     if (!isFetch || !url) setIsFetch(false);

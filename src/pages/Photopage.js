@@ -11,7 +11,7 @@ const Photopage = () => {
   let [Pictures, setPictures] = useState([]);
   let [searchInput, setSearchInput] = useState("");
   let [url, setURL] = useState(initURL);
-  let [isFetch, setIsFetch] = useState(false);
+  let [isFetch, setIsFetch] = useState(true);
 
   const observer = useRef();
   const lastImageRef = useCallback(
@@ -27,10 +27,6 @@ const Photopage = () => {
     },
     [isFetch]
   );
-
-  useEffect(() => {
-    search();
-  }, []);
 
   useEffect(() => {
     if (!isFetch || !url) setIsFetch(false);
