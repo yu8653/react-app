@@ -21,7 +21,7 @@ const Video = ({ video, innerRef }) => {
     };
   }, []);
 
-  const imgMouseOver = (e) => {
+  const videoLoad = (e) => {
     videoRef.current.load();
   };
 
@@ -44,10 +44,8 @@ const Video = ({ video, innerRef }) => {
           loop
           className={!videoReady ? "transparent" : ""}
           onCanPlay={videoCanPlay}
-          onMouseOver={videoPlay}
-          onMouseOut={videoPause}
-          onTouchStart={videoPlay}
-          onTouchEnd={videoPause}
+          onPointerEnter={videoPlay}
+          onPointerLeave={videoPause}
         >
           {video.video_files.map((file) => (
             <source key={file.id} src={file.link} type={file.file_type} />
@@ -59,7 +57,7 @@ const Video = ({ video, innerRef }) => {
           loading="lazy"
           src={imgSrc}
           alt="cover"
-          onMouseOver={imgMouseOver}
+          onPointerEnter={videoLoad}
         />
 
         <div className="intro">
