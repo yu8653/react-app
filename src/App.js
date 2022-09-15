@@ -1,8 +1,8 @@
 import React from "react";
 import Nav from "./components/Nav";
-import Homepage from "./pages/Homepage";
-import Photopage from "./pages/Photopage";
-import Videopage from "./pages/Videopage";
+import Home from "./Home";
+import Photopage from "./features/photo/Photopage";
+import Videopage from "./features/vidoe/Videopage";
 import { Routes, Route } from "react-router-dom";
 import "./styles/styles.css";
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Nav />
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/photo" element={<Photopage />}></Route>
         <Route path="/video" element={<Videopage />}></Route>
       </Routes>

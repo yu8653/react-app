@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Search from "../components/Search";
-import Video from "../components/Video";
-import Scrolltop from "../components/Scrolltop";
-import Spinner from "../components/Spinner";
-import Pexels from "../services/pexel";
+import Search from "../../components/Search";
+import Video from "./Video";
+import Scrolltop from "../../components/Scrolltop";
+import Spinner from "../../components/Spinner";
+import Pexels from "../../services/pexel";
 
 const Videopage = () => {
   const initURL = `https://api.pexels.com/videos/popular?page=1&per_page=15`;

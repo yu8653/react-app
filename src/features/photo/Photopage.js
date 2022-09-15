@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Search from "../components/Search";
-import Picture from "../components/Picture";
-import Spinner from "../components/Spinner";
-import Scrolltop from "../components/Scrolltop";
-import Pexels from "../services/pexel";
+import Search from "../../components/Search";
+import Picture from "./Picture";
+import Spinner from "../../components/Spinner";
+import Scrolltop from "../../components/Scrolltop";
+import Pexels from "../../services/pexel";
 
 const Photopage = () => {
   const initURL = `https://api.pexels.com/v1/curated?page=1&per_page=15`;

@@ -1,10 +1,10 @@
 import React from "react";
-import github from "../image/github.png";
-import react from "../image/react.png";
-import pexel from "../image/pexels.png";
-import vercel from "../image/Vercel.png";
+import github from "./image/github.png";
+import react from "./image/react.png";
+import pexel from "./image/pexels.png";
+import vercel from "./image/Vercel.png";
 
-const Homepage = () => {
+const Home = () => {
   return (
     <>
       <div className="container">
@@ -12,19 +12,16 @@ const Homepage = () => {
           <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
             <img src={react} alt="react logo" />
           </a>
-          <p>Build with React</p>
         </div>
         <div className="card">
           <a href="https://www.pexels.com/" target="_blank" rel="noreferrer">
             <img src={pexel} alt="pexel logo" />
           </a>
-          <p>Pictures and vodeos from Pexels</p>
         </div>
         <div className="card">
           <a href="https://vercel.com/" target="_blank" rel="noreferrer">
             <img src={vercel} alt="vercel logo" />
           </a>
-          <p>Deploy on Vercel</p>
         </div>
         <div className="card">
           <a href="https://github.com/" target="_blank" rel="noreferrer">
@@ -46,4 +43,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Home;
