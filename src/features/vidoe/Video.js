@@ -29,7 +29,7 @@ const Video = ({ video, innerRef }) => {
     setVideoReady(true);
   };
   const videoPlay = (e) => {
-    e.target.play();
+    if (videoReady) e.target.play();
   };
   const videoPause = (e) => {
     e.target.pause();
@@ -46,6 +46,7 @@ const Video = ({ video, innerRef }) => {
           onCanPlay={videoCanPlay}
           onPointerEnter={videoPlay}
           onPointerLeave={videoPause}
+          muted="muted"
         >
           {video.video_files.map((file) => (
             <source key={file.id} src={file.link} type={file.file_type} />
