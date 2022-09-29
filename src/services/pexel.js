@@ -1,4 +1,4 @@
-const AUTH = "563492ad6f9170000100000133f03d6af3ab48d19585e439d2d2a092";
+const AUTH = process.env.REACT_APP_PEXELS_API_KEY;
 
 class Pexels {
   getData(url) {
